@@ -12,15 +12,16 @@ function App() {
     favColor: "",
   })
 
-  const handleChange = (event) => {
-    const {name, value, type, checked } = event.target
+  function handleChange(event) {
+    console.log(event)
+    const {name, value, type, checked} = event.target
     setFormData(prevFormData => {
-      return {
-        ...prevFormData, 
-        [name]: type === "checkbox" ? checked : value
-      }
+        return {
+            ...prevFormData,
+            [name]: type === "checkbox" ? checked : value
+        }
     })
-  }
+}
   return (
     <div className="App">
       <form>
@@ -28,7 +29,7 @@ function App() {
             type="text"
             placeholder="First Name"
             onChange={handleChange}
-            name="firstname"
+            name="firstName"
             value={formData.firstName}
             />
 
@@ -36,7 +37,7 @@ function App() {
             type="text"
             placeholder="Last Name"
             onChange={handleChange}
-            name="lastname"
+            name="lastName"
             value={formData.lastName}
             />
 
