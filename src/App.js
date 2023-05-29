@@ -1,23 +1,123 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
 import './App.css';
 
 function App() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    comments: "",
+    isFriendly: true,
+    employment: "",
+    favColor: "",
+  })
+
+  const handleChange = (event) => {
+    const {name, value, type, checked } = event.target
+    setFormData(prevFormData => {
+      return {
+        ...prevFormData, 
+        [name]: type === "checkbox" ? checked : value
+      }
+    })
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form>
+        <input 
+            type="text"
+            placeholder="First Name"
+            onChange={handleChange}
+            name="firstname"
+            value={formData.firstName}
+            />
+
+        <input 
+            type="text"
+            placeholder="Last Name"
+            onChange={handleChange}
+            name="lastname"
+            value={formData.lastName}
+            />
+
+        <input 
+            type="email"
+            placeholder="Email"
+            onChange={handleChange}
+            name="email"
+            value={formData.email}
+            />
+<br />
+<br />
+        <textarea
+            value={formData.comments}
+            placeholder="comments"
+            onChange={handleChange}
+            name="comments"
+            />
+<br />
+<br />
+        <input
+            type="checkbox"
+            id="isFriendly"
+            checked={formData.isFriendly}
+            onChange={handleChange}
+            name="isFriendly"
+            />
+      <label htmlFor='isFriendly'>Are You Friendly?</label>
+      <br />
+      <br />
+
+      <fieldset>
+      <legend>Current employment status</legend>
+                <input 
+                    type="radio"
+                    id="unemployed"
+                    name="employment"
+                    value="unemployed"
+                    checked={formData.employment === "unemployed"}
+                    onChange={handleChange}
+                />
+                <label htmlFor="unemployed">Unemployed</label>
+                <br />
+                <input 
+                    type="radio"
+                    id="part-time"
+                    name="employment"
+                    value="part-time"
+                    checked={formData.employment === "part-time"}
+                    onChange={handleChange}
+                />
+                <label htmlFor="part-time">Part-Time</label>
+                <br />
+                <input 
+                    type="radio"
+                    id="full-time"
+                    name="employment"
+                    value="full-time"
+                    checked={formData.employment === "full-time"}
+                    onChange={handleChange}
+                />
+                <label htmlFor='full-time'>Full-Time</label>
+      </fieldset>
+      <br />
+      <label htmlFor='favColor'>What is Your Favorite Color</label>
+      <br />
+          <select 
+          id="favColor"
+          name="favColor"
+          onChange={handleChange}
+          value={formData.favColor}
+          >
+            <option value="red">Red</option>
+            <option value="orange">Orange</option>
+            <option value="yellow">Yellow</option>
+            <option value="green">Green</option>
+            <option value="Blue">Blue</option>
+            <option value="indigo">Indigo</option>
+            <option value="violet">Violet</option>
+            </select>
+      </form>
     </div>
   );
 }
